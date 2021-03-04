@@ -9,6 +9,8 @@ npm install
 
 ```
 
+> create db taskDB in your local machine & import php_backend/taskdb.sql into db
+
 # Run App
 
 ```
