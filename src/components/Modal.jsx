@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import FormBox from "./FormBox";
+import { loginCheck } from "../utils/loginCheck";
 
 const ModalBox = ({ show, handleClose, taskid, setrerender }) => {
 	const [singdata, setsingdata] = useState({
@@ -25,6 +26,8 @@ const ModalBox = ({ show, handleClose, taskid, setrerender }) => {
 			})
 			.catch((err) => setErr(err));
 	}, [taskid]);
+
+	let userInfo = loginCheck();
 
 	return (
 		<div>

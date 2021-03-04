@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import axios from "axios";
 import ModalBox from "./Modal";
+import { loginCheck } from "../utils/loginCheck";
 
 const TableData = ({ data, setrerender }) => {
 	const [err, setErr] = useState();
@@ -32,6 +33,9 @@ const TableData = ({ data, setrerender }) => {
 		alert("data deleted!");
 		setsuccess(0);
 	}
+
+	let userInfo = loginCheck();
+	console.log(userInfo);
 
 	return (
 		<div>
@@ -65,7 +69,11 @@ const TableData = ({ data, setrerender }) => {
 							<td>{dt.assignedBy}</td>
 							<td>{dt.assignedTo}</td>
 							<td>
-								<Button variant="danger" onClick={() => deleteTask(dt.task_id)}>
+								<Button
+									variant="danger"
+									onClick={() => deleteTask(dt.task_id)}
+									disabled={userInfo.role === "employee"}
+								>
 									Delete
 								</Button>
 							</td>
@@ -76,6 +84,7 @@ const TableData = ({ data, setrerender }) => {
 										settaskId(dt.task_id);
 										editTask();
 									}}
+									disabled={userInfo.role === "employee"}
 								>
 									Edit
 								</Button>
